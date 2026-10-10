@@ -1,0 +1,31 @@
+graph TD
+    subgraph Dev["Developer Workflow"]
+        DevUser[Dev] --> Git[Git Repo]
+        Git --> CI[CI/CD Pipeline]
+    end
+
+    subgraph Pipeline["Build"]
+        CI --> Test[Tests & Security]
+        Test --> Build[Docker Build]
+        Build --> Reg[(Registry)]
+        Reg --> Argo[ArgoCD]
+        Argo --> K8s{Kubernetes}
+    f
+
+    subgraph Services["Microservices"]
+        K8s --> Gateway[API Gateway]
+        Gateway --> Auth[Auth Svc]
+        Gateway --> User[User Svc]
+        Gateway --> Order[Order Svc]
+        
+        Auth --> DB1[(Auth DB)]
+        User --> DB2[(User DB)]
+        Order --> DB3[(Order DB)]
+        
+        Order --> MQ{{Message Queue}}
+        MQ --> Notif[Notification Svc]
+    end
+
+    style CI fill:#f9f,stroke:#333
+    style K8s fill:#bbf,stroke:#333
+    style MQ fill:#ff9,stroke:#333
