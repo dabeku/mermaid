@@ -10,9 +10,9 @@ graph TD
         Build --> Reg[(Registry)]
         Reg --> Argo[ArgoCD]
         Argo --> K8s{Kubernetes}
-    f
+    end
 
-    subgraph Services["Microservices"]
+    subgraph Services["f"]
         K8s --> Gateway[API Gateway]
         Gateway --> Auth[Auth Svc]
         Gateway --> User[User Svc]
@@ -29,3 +29,4 @@ graph TD
     style CI fill:#f9f,stroke:#333
     style K8s fill:#bbf,stroke:#333
     style MQ fill:#ff9,stroke:#333
+    
